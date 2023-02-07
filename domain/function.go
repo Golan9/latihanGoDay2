@@ -52,12 +52,15 @@ func Filter(numbers []int, callback func(int) bool) (result []int) {
 }
 
 // function with multiple return
-func SetPersonalData(n string, l string, a int) PersonalData {
+func SetPersonalData(n string, l string, a int) (PersonalData, error) {
 	var p PersonalData
 	p.Name = n
 	p.Location = l
 	p.Age = a
-	return p
+	if p.Name == "" || p.Location == "" || p.Age == 0 {
+		return p, fmt.Errorf("salah satu isian tidak boleh kosong")
+	}
+	return p, nil
 }
 
 func Test() {
